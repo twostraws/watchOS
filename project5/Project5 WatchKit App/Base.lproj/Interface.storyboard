@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Project5_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="0.5" alignment="left" id="c50-fD-6wf">
+                            <items>
+                                <button width="0.5" height="1" alignment="left" title="Button" id="HJ7-D8-ent">
+                                    <connections>
+                                        <action selector="tlButtonTapped" destination="AgC-eL-Hgc" id="FKA-Qs-GR9"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" height="1" alignment="left" title="Button" id="EkQ-kI-GEh">
+                                    <connections>
+                                        <action selector="trButtonTapped" destination="AgC-eL-Hgc" id="ffZ-8J-8tk"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" height="0.5" alignment="left" id="Uc7-Jv-qUJ">
+                            <items>
+                                <button width="0.5" height="1" alignment="left" title="Button" id="gNw-7i-bbg">
+                                    <connections>
+                                        <action selector="blButtonTapped" destination="AgC-eL-Hgc" id="uGf-ms-4qH"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" height="1" alignment="left" title="Button" id="6hb-yo-aox">
+                                    <connections>
+                                        <action selector="brButtonTapped" destination="AgC-eL-Hgc" id="1e9-m7-Z45"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="Kms-gF-qfT">
+                        <items>
+                            <menuItem title="Restart" icon="resume" id="nGw-Qw-0TH">
+                                <connections>
+                                    <action selector="startNewGame" destination="AgC-eL-Hgc" id="4Zv-eX-GBy"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="blButton" destination="gNw-7i-bbg" id="Btd-Gv-Brl"/>
+                        <outlet property="brButton" destination="6hb-yo-aox" id="oCn-1U-taS"/>
+                        <outlet property="tlButton" destination="HJ7-D8-ent" id="cpv-Mx-m3f"/>
+                        <outlet property="trButton" destination="EkQ-kI-GEh" id="7Xk-xD-cFw"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>

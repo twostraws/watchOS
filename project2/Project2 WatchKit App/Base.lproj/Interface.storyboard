@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Project2_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="center" hidden="YES" text="You win!" id="cbI-Xa-ATG">
+                            <fontDescription key="font" type="system" pointSize="36"/>
+                        </label>
+                        <imageView width="0.5" height="0.5" alignment="center" id="jK6-wE-PXJ"/>
+                        <separator alignment="left" id="X6I-Z2-v37"/>
+                        <group width="1" height="0.33000000000000002" alignment="left" id="8Rf-p0-hs3">
+                            <items>
+                                <button width="0.33000000000000002" height="1" alignment="left" id="SaV-NL-DHI">
+                                    <connections>
+                                        <action selector="rockTapped" destination="AgC-eL-Hgc" id="72L-Wm-CWm"/>
+                                    </connections>
+                                </button>
+                                <button width="0.34000000000000002" height="1" alignment="left" id="zEO-JZ-Xjh">
+                                    <connections>
+                                        <action selector="paperTapped" destination="AgC-eL-Hgc" id="ON6-g1-yFt"/>
+                                    </connections>
+                                </button>
+                                <button width="0.33000000000000002" height="1" alignment="left" id="eCy-KV-cNy">
+                                    <connections>
+                                        <action selector="scissorsTapped" destination="AgC-eL-Hgc" id="GEG-yj-yjf"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="0.90000000000000002" alignment="center" id="cm1-dr-EJq">
+                            <items>
+                                <label alignment="left" text="1/20" id="DZR-Cr-LVD"/>
+                                <timer alignment="right" id="FUz-or-caC">
+                                    <calendarUnit key="units" minute="YES" second="YES"/>
+                                </timer>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="answers" destination="8Rf-p0-hs3" id="5UN-D8-fJa"/>
+                        <outlet property="levelCounter" destination="DZR-Cr-LVD" id="Eo7-m5-str"/>
+                        <outlet property="paper" destination="zEO-JZ-Xjh" id="L52-fq-oNc"/>
+                        <outlet property="question" destination="jK6-wE-PXJ" id="koN-P7-xU3"/>
+                        <outlet property="result" destination="cbI-Xa-ATG" id="x7H-jo-9f5"/>
+                        <outlet property="rock" destination="SaV-NL-DHI" id="Cwx-l0-1y5"/>
+                        <outlet property="scissors" destination="eCy-KV-cNy" id="3qg-vl-n3p"/>
+                        <outlet property="timer" destination="FUz-or-caC" id="1sR-gz-sRQ"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>

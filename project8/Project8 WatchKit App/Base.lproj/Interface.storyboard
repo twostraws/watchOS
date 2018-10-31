@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Project8_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="center" text="Safe Crack" id="KMr-Vl-NgK">
+                            <fontDescription key="font" type="system" pointSize="24"/>
+                        </label>
+                        <slider width="1" alignment="left" value="50" maximum="100" steps="100" id="3Q1-lJ-7re"/>
+                        <button width="1" alignment="left" title="Next" id="6Ek-oG-S5R">
+                            <connections>
+                                <action selector="nextTapped" destination="AgC-eL-Hgc" id="atP-DP-Ljf"/>
+                            </connections>
+                        </button>
+                        <timer alignment="center" id="j6t-AE-BTw">
+                            <calendarUnit key="units" minute="YES" second="YES"/>
+                        </timer>
+                    </items>
+                    <connections>
+                        <outlet property="nextButton" destination="6Ek-oG-S5R" id="bx1-Gj-5tu"/>
+                        <outlet property="numbersLabel" destination="KMr-Vl-NgK" id="czr-dV-beN"/>
+                        <outlet property="safeValue" destination="3Q1-lJ-7re" id="FZ2-Bc-hSf"/>
+                        <outlet property="timer" destination="j6t-AE-BTw" id="Fha-VC-901"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--WatchFX-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="Home" title="WatchFX" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Project4_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label height="0.33000000000000002" alignment="center" text="500" id="Pyf-fh-Cqa">
+                            <fontDescription key="font" type="system" pointSize="52"/>
+                        </label>
+                        <slider width="1" height="0.33000000000000002" alignment="left" continuous="YES" value="500" maximum="1000" steps="50" id="Dkd-le-TCQ">
+                            <connections>
+                                <action selector="amountChanged:" destination="AgC-eL-Hgc" id="3ab-Zs-Egl"/>
+                            </connections>
+                        </slider>
+                        <group width="1" height="0.33000000000000002" alignment="left" id="4Fe-Pq-LXf">
+                            <items>
+                                <picker width="0.59999999999999998" height="1" alignment="left" focusStyle="stack" id="SEr-gU-pkh">
+                                    <connections>
+                                        <action selector="baseCurrencyChanged:" destination="AgC-eL-Hgc" id="nqg-qr-w5S"/>
+                                    </connections>
+                                </picker>
+                                <button width="0.40000000000000002" height="1" alignment="left" title="Go" id="WVM-xM-L0A">
+                                    <connections>
+                                        <action selector="convertTapped" destination="AgC-eL-Hgc" id="iMl-cq-DcZ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="amountLabel" destination="Pyf-fh-Cqa" id="Rbv-NL-JKW"/>
+                        <outlet property="amountSlider" destination="Dkd-le-TCQ" id="Fpk-1Q-VNa"/>
+                        <outlet property="currencyPicker" destination="SEr-gU-pkh" id="4mW-18-zMa"/>
+                        <segue destination="0iS-96-CeF" kind="relationship" relationship="nextPage" id="h0y-HW-aH8"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+        <!--Results-->
+        <scene sceneID="INg-vr-hCW">
+            <objects>
+                <controller identifier="Results" id="aQK-wU-WGA" customClass="ResultsInterfaceController" customModule="Project4_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" hidden="YES" id="Y5A-gb-C9Z">
+                            <items>
+                                <tableRow identifier="Row" selectable="NO" id="f4r-Zf-xsG" customClass="CurrencyRow" customModule="Project4_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="WWj-MO-reW">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Label" id="ulf-bY-QGl"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="group" destination="WWj-MO-reW" id="vFk-n7-MRW"/>
+                                        <outlet property="textLabel" destination="ulf-bY-QGl" id="HFZ-d8-w8M"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <button width="1" alignment="left" hidden="YES" title="Done" id="taA-mE-rrg">
+                            <color key="backgroundColor" red="0.24749882519999999" green="0.55982828139999996" blue="0.96867442130000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="doneTapped" destination="aQK-wU-WGA" id="PYV-XD-Rth"/>
+                            </connections>
+                        </button>
+                        <label alignment="center" verticalAlignment="center" text="Fetching…" id="fnV-LD-2U5"/>
+                    </items>
+                    <connections>
+                        <outlet property="done" destination="taA-mE-rrg" id="z9Y-UA-o5r"/>
+                        <outlet property="status" destination="fnV-LD-2U5" id="qJI-bg-1VV"/>
+                        <outlet property="table" destination="Y5A-gb-C9Z" id="8uu-h6-y0W"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="34" y="343"/>
+        </scene>
+        <!--Currencies-->
+        <scene sceneID="YdS-UN-Kt9">
+            <objects>
+                <controller identifier="Currencies" title="Currencies" id="0iS-96-CeF" customClass="CurrenciesInterfaceController" customModule="Project4_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="0mI-o4-xVs">
+                            <items>
+                                <tableRow identifier="Row" id="cmf-mb-nEL" customClass="CurrencyRow" customModule="Project4_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="xhf-hs-Vgr">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Label" id="hCd-lm-KMh"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="group" destination="xhf-hs-Vgr" id="RPm-Hl-GFZ"/>
+                                        <outlet property="textLabel" destination="hCd-lm-KMh" id="vKL-Sr-fZ6"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="0mI-o4-xVs" id="QaA-yA-tFQ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="338" y="37"/>
+        </scene>
+    </scenes>
+</document>

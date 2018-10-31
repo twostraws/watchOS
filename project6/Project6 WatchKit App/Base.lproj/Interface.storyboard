@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Project6_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <button width="1" alignment="left" title="Dictation" id="2Nc-7j-Pll">
+                            <connections>
+                                <action selector="dictationTapped" destination="AgC-eL-Hgc" id="9rJ-ou-kub"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Multi Input" id="ig8-67-wfr">
+                            <connections>
+                                <action selector="multiInputTapped" destination="AgC-eL-Hgc" id="ZZI-X7-O0j"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Recording" id="KpN-4s-EH8">
+                            <connections>
+                                <action selector="recordingTapped" destination="AgC-eL-Hgc" id="RRP-ro-4re"/>
+                            </connections>
+                        </button>
+                        <imageView alignment="left" id="Z15-zd-LuQ"/>
+                    </items>
+                    <connections>
+                        <outlet property="image" destination="Z15-zd-LuQ" id="SjX-PF-q53"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>
