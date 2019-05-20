@@ -43,7 +43,7 @@ class CurrenciesInterfaceController: WKInterfaceController {
         var selectedCurrencies = defaults.array(forKey: InterfaceController.selectedCurrenciesKey) as? [String] ?? InterfaceController.defaultCurrencies
 
         let selectedCurrency = InterfaceController.currencies[rowIndex]
-        if let index = selectedCurrencies.index(of: selectedCurrency) {
+        if let index = selectedCurrencies.firstIndex(of: selectedCurrency) {
             selectedCurrencies.remove(at: index)
             row.group.setBackgroundColor(deselectedColor)
         } else {
