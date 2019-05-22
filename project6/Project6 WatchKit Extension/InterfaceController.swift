@@ -9,9 +9,7 @@
 import Foundation
 import WatchKit
 
-class InterfaceController: WKInterfaceController {
-    @IBOutlet var image: WKInterfaceImage!
-    
+class InterfaceController: WKInterfaceController {    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -26,13 +24,9 @@ class InterfaceController: WKInterfaceController {
     }
 
     @IBAction func multiInputTapped() {
-        presentTextInputController(withSuggestions: ["Hacking with Swift", "Hacking with macOS", "Server-Side Swift"], allowedInputMode: .allowAnimatedEmoji) { result in
-            if let result = result?.first as? String {
-                print(result)
-            } else if let result = result?.first as? Data {
-                guard let imageData = UIImage(data: result) else { return }
-                self.image.setImage(imageData)
-            }
+        presentTextInputController(withSuggestions: ["Hacking with Swift", "Hacking with macOS", "Server-Side Swift"], allowedInputMode: .allowEmoji) { result in
+            guard let result = result?.first as? String else { return }
+            print(result)
         }
     }
 
