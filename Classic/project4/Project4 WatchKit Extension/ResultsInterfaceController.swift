@@ -45,6 +45,7 @@ class ResultsInterfaceController: WKInterfaceController {
     func fetchData(for baseCurrency: String) {
         if let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=\(appID)&base=\(baseCurrency)") {
             let urlRequest = URLRequest(url: url)
+            print(url)
 
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let data = data {

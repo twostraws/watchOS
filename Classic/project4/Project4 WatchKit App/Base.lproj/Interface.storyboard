@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch38" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15705" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
         <!--WatchFX-->
@@ -18,6 +16,7 @@
                             <fontDescription key="font" type="system" pointSize="52"/>
                         </label>
                         <slider width="1" height="0.33000000000000002" alignment="left" continuous="YES" value="500" maximum="1000" steps="50" id="Dkd-le-TCQ">
+                            <color key="color" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="amountChanged:" destination="AgC-eL-Hgc" id="3ab-Zs-Egl"/>
                             </connections>
@@ -45,6 +44,7 @@
                     </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="34" y="51"/>
         </scene>
         <!--Results-->
         <scene sceneID="INg-vr-hCW">
