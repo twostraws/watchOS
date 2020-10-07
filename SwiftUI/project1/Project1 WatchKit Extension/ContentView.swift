@@ -2,59 +2,52 @@
 //  ContentView.swift
 //  Project1 WatchKit Extension
 //
-//  Created by Paul Hudson on 18/02/2020.
-//  Copyright © 2020 Paul Hudson. All rights reserved.
+//  Created by Paul Hudson on 07/10/2020.
 //
 
 import SwiftUI
 
 struct ContentView: View {
-    @State private var amount = 500.0
-    @State private var selectedCurrency = "USD"
-    @State private var amountFocused = false
-
-    static let currencies = ["USD", "AUD", "CAD", "CHF", "CNY", "EUR", "GBP", "HKD", "JPY", "SGD"]
-    static let selectedCurrenciesKey = "SelectedCurrencies"
-    static let defaultCurrencies = ["USD", "EUR"]
+    @State private var notes = [Note]()
+    @State private var text = ""
 
     var body: some View {
-        GeometryReader { geo in
-            VStack(spacing: 0) {
-                Text("\(Int(self.amount))")
-                    .font(.system(size: 52))
-                    .padding()
-                    .frame(width: geo.size.width)
-                    .contentShape(Rectangle())
-                    .focusable { self.amountFocused = $0 }
-                    .digitalCrownRotation(self.$amount, from: 0, through: 1000, by: 20, sensitivity: .high, isContinuous: false, isHapticFeedbackEnabled: true)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .strokeBorder(self.amountFocused ? Color.green : Color.white, lineWidth: 1)
-                    )
-                    .padding(.bottom)
+        VStack {
+            HStack {
+                TextField("Add new note", text: $text)
 
-//                Commented out so you can use the Digital Crown approach.
-//                Slider(value: self.$amount, in: 0...1000, step: 20)
-//                    .frame(height: geo.size.height / 3)
-//                    .accentColor(Color.green)
-                
+                Button {
+                    guard text.isEmpty == false else { return }
 
-                HStack {
-                    Picker(selection: self.$selectedCurrency, label: EmptyView()) {
-                        ForEach(Self.currencies, id: \.self) { currency in
-                            Text(currency)
-                        }
-                    }
+                    let note = Note(id: UUID(), text: text)
+                    notes.append(note)
 
-                    NavigationLink(destination: ResultsView(amount: self.amount, baseCurrency: self.selectedCurrency)) {
-                        Text("Go")
-                    }
-                    .frame(width: geo.size.width * 0.4)
+                    text = ""
+                } label: {
+                    Image(systemName: "plus")
+                        .padding()
                 }
-                .frame(height: geo.size.height / 3)
+                .fixedSize()
+                .buttonStyle(BorderedButtonStyle(tint: .blue))
+            }
+
+            List {
+                ForEach(0..<notes.count, id: \.self) { i in
+                    NavigationLink(destination: DetailView(index: i, note: notes[i])) {
+                        Text(notes[i].text)
+                            .lineLimit(1)
+                    }
+                }
+                .onDelete(perform: delete)
             }
         }
-        .navigationBarTitle("WatchFX")
+        .navigationTitle("NoteDictate")
+    }
+
+    func delete(offsets: IndexSet) {
+        withAnimation {
+            notes.remove(atOffsets: offsets)
+        }
     }
 }
 
