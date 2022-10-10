@@ -2,27 +2,28 @@
 //  ContentView.swift
 //  Project12
 //
-//  Created by Paul Hudson on 07/10/2020.
+//  Created by Paul Hudson on 10/10/2022.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     @StateObject var connectivity = Connectivity()
-
+    
     var body: some View {
         VStack(spacing: 30) {
+            Text(connectivity.receivedText)
             Button("Message", action: sendMessage)
             Button("Context", action: sendContext)
             Button("File", action: sendFile)
             Button("Complication", action: sendComplication)
         }
     }
-
+    
     func sendMessage() {
 //        let data = ["text": "User info from the phone"]
 //        connectivity.transferUserInfo(data)
-
+        
         let data = ["text": "A message from the phone"]
         connectivity.sendMessage(data)
     }
@@ -31,10 +32,10 @@ struct ContentView: View {
         let data = ["text": "Hello from the phone"]
         connectivity.setContext(to: data)
     }
-
+    
     func sendFile() {
         let fm = FileManager.default
-        let sourceURL = getDocumentsDirectory().appendingPathComponent("saved_file")
+        let sourceURL = URL.documentsDirectory.appending(path: "saved_file")
 
         if fm.fileExists(atPath: sourceURL.path) == false {
             try? "Hello, from a phone file".write(to: sourceURL, atomically: true, encoding: .utf8)
@@ -44,9 +45,6 @@ struct ContentView: View {
     }
 
     func sendComplication() {
-        let randomNumber = String(Int.random(in: 0...9))
-        let message = ["number": randomNumber]
-        connectivity.updateComplication(with: message)
     }
 }
 
