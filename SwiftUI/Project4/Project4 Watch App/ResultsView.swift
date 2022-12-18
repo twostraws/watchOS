@@ -80,7 +80,7 @@ struct ResultsView: View {
     }
     
     func rate(for result: (symbol: String, rate: Double)) -> String {
-        result.rate.formatted(.currency(code: result.symbol))
+        (amount * result.rate).formatted(.currency(code: result.symbol))
     }
 }
 
