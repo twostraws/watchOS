@@ -75,6 +75,7 @@ struct ContentView: View {
 
         // remove all their previous answers and reset the text
         correctValues.removeAll()
+        title = "Safe Crack"
 
         // pick the first number to guess
         pickNumber()
