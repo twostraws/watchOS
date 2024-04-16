@@ -103,9 +103,7 @@ struct Complication: Widget {
     }
 }
 
-struct Complication_Previews: PreviewProvider {
-    static var previews: some View {
-        ComplicationEntryView(entry: .example)
-            .previewContext(WidgetPreviewContext(family: .accessoryInline))
-    }
+#Preview {
+    ComplicationEntryView(entry: .example)
+        .previewContext(WidgetPreviewContext(family: .accessoryInline))
 }

@@ -41,8 +41,6 @@ struct CurrenciesView: View {
     }
 }
 
-struct CurrenciesView_Previews: PreviewProvider {
-    static var previews: some View {
-        CurrenciesView()
-    }
+#Preview {
+    CurrenciesView()
 }

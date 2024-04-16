@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var connectivity = Connectivity()
+    @State private var connectivity = Connectivity()
     
     var body: some View {
         VStack(spacing: 30) {
@@ -48,8 +48,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

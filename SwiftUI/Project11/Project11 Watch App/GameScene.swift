@@ -8,7 +8,8 @@
 import SpriteKit
 import WatchKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
+@Observable
+class GameScene: SKScene, SKPhysicsContactDelegate {
     let player = SKNode()
     
     let leftEdge = SKSpriteNode(color: .white, size: CGSize(width: 10, height: 150))
@@ -24,7 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     var createDelay = 500
     
-    @Published var score = 0
+    var score = 0
     
     override func didChangeSize(_ oldSize: CGSize) {
         guard size.width > 100 else { return }

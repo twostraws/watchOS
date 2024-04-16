@@ -41,7 +41,7 @@ import SwiftUI
 //            Circle()
 //                .strokeBorder(Color.red)
 //                .scaleEffect(animationAmount)
-//                .opacity(Double(2 - animationAmount))
+//                .opacity(2 - animationAmount)
 //                .animation(.easeOut(duration: 1).repeatForever(autoreverses: false), value: animationAmount)
 //        )
 //        .onAppear {
@@ -113,8 +113,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

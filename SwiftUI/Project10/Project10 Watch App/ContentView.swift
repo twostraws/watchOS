@@ -17,7 +17,7 @@ struct ContentView: View {
 
     @State private var selectedActivity = 0
     
-    @StateObject var dataManager = DataManager()
+    @State private var dataManager = DataManager()
     
     var body: some View {
         if dataManager.state == .inactive {
@@ -31,8 +31,15 @@ struct ContentView: View {
                 Button("Start Workout") {
                     guard HKHealthStore.isHealthDataAvailable() else { return }
 
-                    dataManager.activity = activities[selectedActivity].type
-                    dataManager.start()
+                    Task {
+                        dataManager.activity = activities[selectedActivity].type
+
+                        do {
+                            try await dataManager.start()
+                        } catch {
+                            // handle errors here
+                        }
+                    }
                 }
             }
         } else {
@@ -41,8 +48,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

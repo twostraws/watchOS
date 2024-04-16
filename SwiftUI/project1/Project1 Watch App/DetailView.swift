@@ -17,10 +17,8 @@ struct DetailView: View {
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            DetailView(index: 1, note: Note(id: UUID(), text: "Example Note"))
-        }
+#Preview {
+    NavigationStack {
+        DetailView(index: 1, note: Note(id: UUID(), text: "Example Note"))
     }
 }

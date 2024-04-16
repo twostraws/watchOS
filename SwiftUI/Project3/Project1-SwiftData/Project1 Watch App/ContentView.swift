@@ -5,10 +5,12 @@
 //  Created by Paul Hudson on 22/09/2022.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var notes = [Note]()
+    @Query(sort: \Note.dateAdded, order: .reverse) private var notes: [Note]
+    @Environment(\.modelContext) var modelContext
     @State private var text = ""
     
     var body: some View {
@@ -19,8 +21,8 @@ struct ContentView: View {
                 Button {
                     guard text.isEmpty == false else { return }
                     
-                    let note = Note(id: UUID(), text: text)
-                    notes.append(note)
+                    let note = Note(text: text)
+                    modelContext.insert(note)
                     text = ""
                 } label: {
                     Image(systemName: "plus")
@@ -32,11 +34,13 @@ struct ContentView: View {
             
             List {
                 ForEach(0..<notes.count, id: \.self) { i in
-                    NavigationLink {
-                        DetailView(index: i, note: notes[i])
-                    } label: {
-                        Text(notes[i].text)
-                            .lineLimit(1)
+                    if i < notes.count {
+                        NavigationLink {
+                            DetailView(index: i, note: notes[i])
+                        } label: {
+                            Text(notes[i].text)
+                                .lineLimit(1)
+                        }
                     }
                 }
                 .onDelete(perform: delete)
@@ -47,8 +51,9 @@ struct ContentView: View {
     }
     
     func delete(offsets: IndexSet) {
-        withAnimation {
-            notes.remove(atOffsets: offsets)
+        for offset in offsets {
+            let note = notes[offset]
+            modelContext.delete(note)
         }
     }
 }

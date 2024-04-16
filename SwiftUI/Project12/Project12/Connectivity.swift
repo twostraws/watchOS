@@ -8,8 +8,9 @@
 import Foundation
 import WatchConnectivity
 
-class Connectivity: NSObject, ObservableObject, WCSessionDelegate {
-    @Published var receivedText = ""
+@Observable
+class Connectivity: NSObject, WCSessionDelegate {
+    var receivedText = ""
     
     override init() {
         super.init()

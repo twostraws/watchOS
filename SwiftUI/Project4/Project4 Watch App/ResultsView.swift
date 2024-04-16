@@ -84,8 +84,6 @@ struct ResultsView: View {
     }
 }
 
-struct ResultsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultsView(amount: 500, baseCurrency: "USD")
-    }
+#Preview {
+    ResultsView(amount: 500, baseCurrency: "USD")
 }

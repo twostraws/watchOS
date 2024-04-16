@@ -13,7 +13,7 @@ struct WorkoutView: View {
     }
 
     @State private var displayMode = DisplayMode.distance
-    @ObservedObject var dataManager: DataManager
+    var dataManager: DataManager
     
     var quantity: String {
         switch displayMode {
@@ -57,8 +57,6 @@ struct WorkoutView: View {
     }
 }
 
-struct WorkoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutView(dataManager: DataManager())
-    }
+#Preview {
+    WorkoutView(dataManager: DataManager())
 }

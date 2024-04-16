@@ -8,7 +8,8 @@
 import Foundation
 import HealthKit
 
-class DataManager: NSObject, ObservableObject, HKWorkoutSessionDelegate, HKLiveWorkoutBuilderDelegate {
+@Observable
+class DataManager: NSObject, HKWorkoutSessionDelegate, HKLiveWorkoutBuilderDelegate {
     enum WorkoutState {
         case inactive, active, paused
     }
@@ -19,13 +20,13 @@ class DataManager: NSObject, ObservableObject, HKWorkoutSessionDelegate, HKLiveW
 
     var activity = HKWorkoutActivityType.cycling
     
-    @Published var state = WorkoutState.inactive
+    var state = WorkoutState.inactive
     
-    @Published var totalEnergyBurned = 0.0
-    @Published var totalDistance = 0.0
-    @Published var lastHeartRate = 0.0
-    
-    func start() {
+    var totalEnergyBurned = 0.0
+    var totalDistance = 0.0
+    var lastHeartRate = 0.0
+
+    func start() async throws {
         let sampleTypes: Set<HKSampleType> = [
             .workoutType(),
             .quantityType(forIdentifier: .heartRate)!,
@@ -35,39 +36,27 @@ class DataManager: NSObject, ObservableObject, HKWorkoutSessionDelegate, HKLiveW
             .quantityType(forIdentifier: .distanceWheelchair)!
         ]
 
-        healthStore.requestAuthorization(toShare: sampleTypes, read: sampleTypes) { success, error in
-            if success {
-                self.beginWorkout()
-            }
-        }
+        try await healthStore.requestAuthorization(toShare: sampleTypes, read: sampleTypes)
+        try await self.beginWorkout()
     }
 
-    private func beginWorkout() {
+    @MainActor
+    private func beginWorkout() async throws {
         let config = HKWorkoutConfiguration()
         config.activityType = activity
         config.locationType = .outdoor
         
-        do {
-            workoutSession = try HKWorkoutSession(healthStore: healthStore, configuration: config)
-            workoutBuilder = workoutSession?.associatedWorkoutBuilder()
-            workoutBuilder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: config)
+        workoutSession = try HKWorkoutSession(healthStore: healthStore, configuration: config)
+        workoutBuilder = workoutSession?.associatedWorkoutBuilder()
+        workoutBuilder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: config)
 
-            workoutSession?.startActivity(with: Date())
-            workoutBuilder?.beginCollection(withStart: Date()) { success, error in
-                guard success else {
-                    return
-                }
+        workoutSession?.delegate = self
+        workoutBuilder?.delegate = self
 
-                Task { @MainActor in
-                    self.state = .active
-                }
-            }
-            
-            workoutSession?.delegate = self
-            workoutBuilder?.delegate = self
-        } catch {
-            // Handle errors here
-        }
+        workoutSession?.startActivity(with: .now)
+        try await workoutBuilder?.beginCollection(at: .now)
+
+        state = .active
     }
     
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
@@ -80,7 +69,7 @@ class DataManager: NSObject, ObservableObject, HKWorkoutSessionDelegate, HKLiveW
                 self.state = .paused
 
             case .ended:
-                self.save()
+                try await self.save()
 
             default:
                 break
@@ -132,14 +121,12 @@ class DataManager: NSObject, ObservableObject, HKWorkoutSessionDelegate, HKLiveW
         workoutSession?.end()
     }
 
-    private func save() {
-        workoutBuilder?.endCollection(withEnd: Date()) { success, error in
-            self.workoutBuilder?.finishWorkout { workout, error in
-                Task { @MainActor in
-                    self.state = .inactive
-                }
-            }
-        }
+    @MainActor
+    private func save() async throws {
+        try await workoutBuilder?.endCollection(at: .now)
+        try await workoutBuilder?.finishWorkout()
+
+        state = .inactive
     }
 }
 

@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var rotation = 0.0
     @State private var title = "Woo"
     
-    @StateObject var scene: GameScene = {
+    @State private var scene: GameScene = {
         let scene = GameScene()
         scene.size = CGSize(width: 300, height: 400)
         scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -27,7 +27,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
                 .focusable()
                 .digitalCrownRotation($rotation, from: -1_000_000_000, through: 1_000_000_000, sensitivity: .low, isContinuous: true)
-                .onChange(of: rotation) { _ in
+                .onChange(of: rotation) {
                     scene.rotate(to: rotation)
                 }
                 .onTapGesture(perform: scene.reset)
@@ -37,8 +37,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }
