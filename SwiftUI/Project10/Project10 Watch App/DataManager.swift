@@ -27,6 +27,10 @@ class DataManager: NSObject, HKWorkoutSessionDelegate, HKLiveWorkoutBuilderDeleg
     var lastHeartRate = 0.0
 
     func start() async throws {
+        totalEnergyBurned = 0
+        totalDistance = 0
+        lastHeartRate = 0
+
         let sampleTypes: Set<HKSampleType> = [
             .workoutType(),
             .quantityType(forIdentifier: .heartRate)!,
